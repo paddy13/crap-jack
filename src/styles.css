@@ -1,0 +1,47 @@
+#root {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#game-title {
+    width: 20%;
+    margin: auto;
+    padding: 10px;
+}
+
+.playing-table {
+    margin: 4%;
+    padding-left: 25%;
+    border-radius: 500px;
+    background: rgb(45, 190, 45);
+}
+
+.drawn-cards {
+    padding-left: 50px;
+    width: 15%
+}
+
+.player-card {
+    padding-top: 10%;
+}
+
+.deal-reveal.btn, #start-button{
+    display: block;
+    width: 200px;
+    margin: auto;
+    padding: 10px;
+}
+
+.rules {
+    text-decoration: underline;
+    text-align: right;
+    color: blue;
+    padding-right: 50px;
+    float: right;
+}
+
+#rulesSummary {
+    width: 30%;
+    border: 1px solid black;
+    float: right;
+    background: rgb(255, 255, 99);
+}
