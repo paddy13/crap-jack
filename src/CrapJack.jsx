@@ -100,7 +100,7 @@ class CrapJack extends React.Component {
         let value;
         for (let i = 0; i < cards.length; i++) {
             value = cards[i].value;
-            if(value == 'ACE' || value == 'KING' || value == 'QUEEN' || value == 'JACK') {
+            if(value === 'ACE' || value === 'KING' || value === 'QUEEN' || value === 'JACK') {
                 score += 10;
             } else {
                 score += parseInt(value);
