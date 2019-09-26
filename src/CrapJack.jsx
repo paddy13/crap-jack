@@ -46,7 +46,6 @@ class CrapJack extends React.Component {
         axios
         .get("https://deckofcardsapi.com/api/deck/" + this.state.deckID + "/draw/?count=6")
         .then(response => {
-            console.log(response.data.remaining);
             this.setState({ 
                 deckID: response.data.deck_id,
                 dealersCard : response.data.cards.slice(0, 3),
@@ -60,17 +59,19 @@ class CrapJack extends React.Component {
     }
 
     revealCardsAndWinner = () => {
+        this.setState({
+            revealCards: true
+        });
+        this.declareWinner();
+    }
+
+    declareWinner() {
         let dealerTotalScore = 0;
         let playerTotalScore = 0;
         const {dealersCard, playersCard, dealerScore, playerScore, playerWinningStreak} = this.state;
 
-        for (let i = 0; i < dealersCard.length; i++) {
-            dealerTotalScore += this.getScore(dealersCard[i].value);
-        }
-
-        for (let i = 0; i < playersCard.length; i++) {
-            playerTotalScore += this.getScore(playersCard[i].value);
-        }
+        dealerTotalScore = this.getScore(dealersCard);
+        playerTotalScore = this.getScore(playersCard);
 
         if (dealerTotalScore <= 21 && (dealerTotalScore > playerTotalScore || playerTotalScore > 21)) {
             this.setState({ 
@@ -92,21 +93,20 @@ class CrapJack extends React.Component {
         } else {
             this.setState({ result: 'It is a TIE' });
         }
-        this.setState({
-            revealCards: true
-        });
     }
 
-    getScore(value) {
-        switch (value) {
-            case 'ACE':
-            case 'KING':
-            case 'QUEEN':
-            case 'JACK':
-                return 10;
-            default:
-                return parseInt(value);
+    getScore(cards) {
+        let score = 0;
+        let value;
+        for (let i = 0; i < cards.length; i++) {
+            value = cards[i].value;
+            if(value == 'ACE' || value == 'KING' || value == 'QUEEN' || value == 'JACK') {
+                score += 10;
+            } else {
+                score += parseInt(value);
+            }
         }
+        return score;
     }
 
     render() {
